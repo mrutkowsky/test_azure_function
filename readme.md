@@ -1,0 +1,1 @@
+This is a test azure function to deploy to function app instance.
