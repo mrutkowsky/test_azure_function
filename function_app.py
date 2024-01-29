@@ -44,3 +44,10 @@ def second_test_azure_function(req: func.HttpRequest) -> func.HttpResponse:
              "This second HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
              status_code=200
         )
+
+@app.function_name(name="TestBlobFunction")
+@app.blob_trigger(arg_name="myblob",
+                    path="newcontainer/test.csv",
+                    connection="AzureWebJobsStorage")
+def test_blob_function(myblob: func.InputStream):
+    logging.info(f"Function triggered after text.csv file was uploaded to newcontainer. blob path: {myblob.name}")
