@@ -1,1 +1,1 @@
-This is a test azure function to deploy to function app instance.
+This is a test azure function to deploy to function app instance. It is also integrated with openai API and can be used in integration with other client as serverless service.
