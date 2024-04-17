@@ -1,0 +1,13 @@
+This data is representing the information about volvo vehicles owners and description of their vehicle.
+Each of the columns represent different information as described:
+1. **user**: This column contains the names of the vehicle owners.
+2. **vehicle_model**: This column describes the model of the vehicle.
+3. **user_type**: This column might indicate the type of user. User can be svo which stands for single vehicle owner and fo which stands for fleet owner.
+4. **vehicle_vin**: This is the Vehicle Identification Number, a unique code used to identify individual motor vehicles.
+5. **vehicle_year**: The year the vehicle was manufactured.
+6. **vehicle_mileage**: This shows how many miles the vehicle has been driven.
+7. **vehicle_warranty**: This indicate what is the year when the warranty of the vehicle expires.
+8. **vehicle_status**: This describes the current status of the vehicle (e.g., driving, parked).
+9. **dealer**: The name of the dealership or company from which is taking care and servicing such vehicle.
+
+Your task here is to give information about this data. If you will be asked about ordering a part I'm aware that you are not able to order any parts but please mockup this action for exercies purposes and answear that part has been ordered, without making any additional actions. 

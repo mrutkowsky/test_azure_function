@@ -5,29 +5,45 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 utils_path = os.path.join(script_dir, 'utils')
 sys.path.append(utils_path)
-from openai_con import *
+from agent import *
+from modules import *
+from langchain.agents.agent_types import AgentType
+from langchain_experimental.agents import create_csv_agent
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-@app.route(route="test-azure-function")
+@app.route(route="volvochatbot")
 def test_azure_function(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-
-    name = req.params.get('name')
-    if not name:
+    
+    prompt = req.args.get('prompt')
+    user_type = req.args.get('user_type')
+    
+    if not prompt:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            name = req_body.get('name')
+            prompt = req_body.get('prompt')
 
-    if name:
-        content = chatgpt_query(f"My name is {name}, does it have any history? Tell me about it", 50)
+    if not user_type:
+        try:
+            req_body = req.get_json()
+            user_type = req_body.get('user_type')
+        except ValueError:
+            user_type = "anonymous"
+
+    if prompt:
+        content = chatbot_agent(prompt)
         return func.HttpResponse(f"{content}")
     else:
         return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+             "Maybe ai won't take our jobs, please ask me a question with prompt argument",
              status_code=200
         )
 
